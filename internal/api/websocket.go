@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	pionRoom "github.com/pion/signaler/internal/room"
+	pionRoom "github.com/bearknocks/signaler/internal/room"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 
