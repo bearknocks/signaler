@@ -19,6 +19,16 @@ func EmitClientMessage(s Server) error {
 }
 
 func Start(s Server, port string) error {
+    r := prepare(s)
+	return http.ListenAndServe("0.0.0.0:"+port, r)
+}
+
+func StartTLS(s Server, port string, certFile, keyFile string) error {
+	r := prepare(s)
+	return http.ListenAndServeTLS("0.0.0.0:"+port, certFile, keyFile, r)
+}
+
+func prepare(s Server) * mux.Router {
 	api.OnClientMessage = s.OnClientMessage
 	api.AuthenticateRequest = s.AuthenticateRequest
 
@@ -30,5 +40,5 @@ func Start(s Server, port string) error {
 	r := mux.NewRouter()
 	addRoutes(r)
 	addRoutes(r.PathPrefix("/v1").Subrouter())
-	return http.ListenAndServe("0.0.0.0:"+port, r)
+	return r
 }
