@@ -5,7 +5,7 @@ import (
 	"net/url"
 
 	"github.com/gorilla/mux"
-	"github.com/pion/signaler/internal/api"
+	"github.com/bearknocks/signaler/internal/api"
 	"github.com/pkg/errors"
 )
 
@@ -19,7 +19,7 @@ func EmitClientMessage(s Server) error {
 }
 
 func Start(s Server, port string) error {
-    r := prepare(s)
+	r := prepare(s)
 	return http.ListenAndServe("0.0.0.0:"+port, r)
 }
 
